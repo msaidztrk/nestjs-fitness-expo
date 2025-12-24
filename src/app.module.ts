@@ -24,7 +24,7 @@ import { SnakeNamingStrategy } from './common/database/snake-naming.strategy';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true, // Auto-create tables (disable in production)
+        synchronize: false,
         namingStrategy: new SnakeNamingStrategy(),
       }),
       inject: [ConfigService],
