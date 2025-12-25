@@ -1,0 +1,41 @@
+
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=${DB_USERNAME:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-root}
+      - DB_NAME=${DB_NAME:-fitness_app}
+      - JWT_SECRET=${JWT_SECRET:-super_secret_key}
+      - JWT_EXPIRATION=${JWT_EXPIRATION:-3650d}
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - fitness-net
+
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_NAME:-fitness_app}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - fitness-net
+
+volumes:
+  db_data:
+
+networks:
+  fitness-net:
