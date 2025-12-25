@@ -15,11 +15,6 @@ export class UsersService {
             throw new ConflictException('User with this email already exists');
         }
 
-        if (createUserDto.password) {
-            const salt = await bcrypt.genSalt();
-            createUserDto.password = await bcrypt.hash(createUserDto.password, salt);
-        }
-
         const { password, ...userData } = createUserDto;
         const userToCreate = this.usersRepository.create({
             ...userData,
