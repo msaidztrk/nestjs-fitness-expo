@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { MetricsModule } from './modules/metrics/metrics.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { AiModule } from './modules/ai/ai.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SnakeNamingStrategy } from './common/database/snake-naming.strategy';
@@ -32,6 +33,7 @@ import { SnakeNamingStrategy } from './common/database/snake-naming.strategy';
     UsersModule,
     MetricsModule,
     AuthModule,
+    AiModule,
   ],
   controllers: [AppController],
   providers: [AppService],
