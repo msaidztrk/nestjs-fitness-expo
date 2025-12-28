@@ -2,3 +2,4 @@
 .agent/rules/rules.md
 /dist
 /node_modules
+*.log
