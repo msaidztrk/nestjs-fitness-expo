@@ -1,13 +1,25 @@
 import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
-import { AiController } from './ai.controller';
-import { AiService } from './ai.service';
 import { ConfigModule } from '@nestjs/config';
 
+import { AiController } from './ai.controller';
+import { DeepSeekChatService, GeminiVisionService } from './services';
+
 @Module({
-    imports: [ConfigModule, HttpModule],
+    imports: [
+        ConfigModule,
+        HttpModule.register({
+            timeout: 60000,
+        }),
+    ],
     controllers: [AiController],
-    providers: [AiService],
-    exports: [AiService],
+    providers: [
+        DeepSeekChatService,
+        GeminiVisionService,
+    ],
+    exports: [
+        DeepSeekChatService,
+        GeminiVisionService,
+    ],
 })
 export class AiModule { }
