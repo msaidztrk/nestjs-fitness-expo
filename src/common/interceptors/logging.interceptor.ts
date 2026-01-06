@@ -57,9 +57,19 @@ export class LoggingInterceptor implements NestInterceptor {
                         httpLogger.info(`   📥 User: "${lastMsg.content.substring(0, 50)}..."`);
                     }
 
+                    if (body?.prompt) {
+                        httpLogger.info(`   📥 Prompt: "${body.prompt.substring(0, 50)}..."`);
+                        if (body?.image) {
+                            const imageType = body.image.url ? 'URL' : 'Base64';
+                            httpLogger.info(`   🖼️ Image: ${imageType}`);
+                        }
+                    }
+
                     if (data && typeof data === 'object' && 'message' in data) {
                         const msg = (data as { message: string }).message;
-                        httpLogger.info(`   📤 AI: "${msg.substring(0, 80)}..."`);
+                        if (msg) {
+                            httpLogger.info(`   📤 AI: "${msg.substring(0, 80)}..."`);
+                        }
                     }
 
                     httpLogger.info('');
