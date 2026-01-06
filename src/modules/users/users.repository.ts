@@ -1,4 +1,3 @@
-
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
@@ -17,5 +16,14 @@ export class UsersRepository extends Repository<User> {
 
     async findByEmail(email: string): Promise<User | null> {
         return this.findOne({ where: { email } });
+    }
+
+    async findByDeviceId(deviceId: string): Promise<User | null> {
+        return this.findOne({ where: { deviceId } });
+    }
+
+    async createByDeviceId(deviceId: string): Promise<User> {
+        const user = this.create({ deviceId });
+        return this.save(user);
     }
 }

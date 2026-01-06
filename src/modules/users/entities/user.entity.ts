@@ -1,13 +1,16 @@
-
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Index } from 'typeorm';
 
 @Entity('users')
 @Index(['email'], { unique: true })
+@Index(['deviceId'], { unique: true })
 export class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'email', length: 255, unique: true })
+    @Column({ name: 'device_id', length: 255, unique: true, nullable: true })
+    deviceId: string;
+
+    @Column({ name: 'email', length: 255, unique: true, nullable: true })
     email: string;
 
     @Column({ name: 'password_hash', length: 255, nullable: true })
