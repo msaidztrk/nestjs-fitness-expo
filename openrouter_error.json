@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-01-07T13:46:22.668Z",
+  "status": 429,
+  "data": {
+    "error": {
+      "message": "Provider returned error",
+      "code": 429,
+      "metadata": {
+        "raw": "google/gemini-2.0-flash-exp:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations",
+        "provider_name": "Google"
+      }
+    },
+    "user_id": "user_37Q9SFLAXRXG4vxOuf879GdqaW7"
+  }
+}

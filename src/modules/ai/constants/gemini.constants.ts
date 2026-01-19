@@ -1,9 +1,10 @@
 export const GEMINI_CONFIG = {
-    API_URL: 'https://openrouter.ai/api/v1/chat/completions',
-    MODEL: 'google/gemini-2.0-flash-exp:free',
+    // Direct Google API URL (method and key will be appended in service)
+    API_URL: 'https://generativelanguage.googleapis.com/v1beta/models',
+    MODEL: 'gemini-2.0-flash', // Google model name
     REQUEST_TIMEOUT: 60000,
-    HTTP_REFERER: 'https://fittrack-pro.app',
-    SITE_TITLE: 'FitTrack Pro',
 } as const;
 
-export const GEMINI_ENV_KEY = 'OPEN_ROUTER_API_KEY_GEMINI' as const;
+export const GEMINI_API_KEYS = [
+    'GOOGLE_GEMINI_API_KEY',
+] as const;

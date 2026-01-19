@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString, IsUrl, ValidateNested } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, ValidateNested, ValidateIf } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserContextDto } from './create-chat.dto';
@@ -6,15 +6,15 @@ import { UserContextDto } from './create-chat.dto';
 export class ImageSourceDto {
     @ApiPropertyOptional({
         example: 'https://example.com/food.jpg',
-        description: 'Resim URL adresi (URL veya base64 kullanılmalı)',
+        description: 'Resim URL adresi',
     })
     @IsOptional()
-    @IsUrl()
+    @IsString()
     readonly url?: string;
 
     @ApiPropertyOptional({
         example: 'data:image/jpeg;base64,/9j/4AAQSkZJRg...',
-        description: 'Base64 encoded resim (URL veya base64 kullanılmalı)',
+        description: 'Base64 encoded resim',
     })
     @IsOptional()
     @IsString()
@@ -36,11 +36,12 @@ export class CreateVisionChatDto {
     })
     @ValidateNested()
     @Type(() => ImageSourceDto)
+    @IsNotEmpty()
     readonly image: ImageSourceDto;
 
     @ApiPropertyOptional({
         type: UserContextDto,
-        description: 'Kullanıcı profil bilgileri (isteğe bağlı)',
+        description: 'Kullanıcı profil bilgileri',
     })
     @IsOptional()
     @ValidateNested()
